@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [advice, setadvice] = useState(" ");
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(-2);
 
   async function getadvice() {
     const res = await fetch("https://api.adviceslip.com/advice");
@@ -11,6 +11,9 @@ function App() {
 
     setCount((c) => c + 1);
   }
+  useEffect(() => {
+    getadvice();
+  }, []);
 
   return (
     <div>
