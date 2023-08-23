@@ -1,7 +1,22 @@
+import { useState } from "react";
+
 function App() {
+  const [advice, setadvice] = useState(" ");
+  const [count, setCount] = useState(0);
+
+  async function getadvice() {
+    const res = await fetch("https://api.adviceslip.com/advice");
+    const data = await res.json();
+    setadvice(data.slip.advice);
+
+    setCount((c) => c + 1);
+  }
+
   return (
     <div>
-      <h1>Hello world</h1>
+      <h1>{advice}</h1>
+      <button onClick={getadvice}>Get advice</button>
+      <p>You have read {count} advice</p>
     </div>
   );
 }
